@@ -1,0 +1,9 @@
+BTBatteryView / BTBTV
+
+Copyright (c) 2026 Munus Modulus.
+All rights reserved.
+
+This software may not be copied, modified, redistributed, sublicensed, or sold
+without prior written permission from the copyright holder.
+
+This software is provided "as is", without warranty of any kind.
