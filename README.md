@@ -23,14 +23,8 @@ Windows 11の設定画面を開かずに、Bluetoothデバイスの残量をす�
   - `Refresh`
   - `Rescan`
   - `Always on top`
-  - `Test notification`
   - `Exit`
 - システムトレイアイコンを左クリックしてバッテリー残量をポップアップ表示
-- バッテリー残量が10%以下になった場合の低残量通知
-- Windows App Notificationによる低残量通知
-- 低残量状態が続く場合の再通知
-- バッテリー残量がさらに低下した場合の再通知
-- 通知動作を確認する `Test notification`
 - 複数起動防止
 - ウィジェット位置の保存
 - `appearance.json` による簡易外観カスタマイズ
@@ -57,17 +51,18 @@ Releasesページの **Assets** から `BTBatteryView.zip` をダウンロード
 5. `X` ボタンを押してもアプリケーションは終了せず、システムトレイへ格納されます。
 6. 完全に終了する場合は、トレイアイコンまたはウィジェットを右クリックし、`Exit` を選択してください。
 7. 新しいデバイスを接続した場合や表示が更新されない場合は、右クリックメニューから `Rescan` を実行してください。
-8. 通知機能を確認する場合は、右クリックメニューから `Test notification` を実行してください。
 
 ## 注意
 
+- BTBatteryViewは低残量時にWindowsの通知・ポップアップ・警告音を表示しません。
+- 低残量はウィジェット／トレイポップアップ上の残量表示色で確認できます。
+  - 20%以下：`BatteryWarningColor`
+  - 10%以下：`LowBatteryColor`
+- `BatteryWarningColor` と `LowBatteryColor` は `appearance.json` から変更できます。
 - Windowsがバッテリー残量を取得できるデバイスのみ対応します。
 - デバイスによっては、10%刻みなど大まかな残量のみ報告される場合があります。
 - バッテリー残量は約1分ごとに確認されます。
 - すべてのBluetoothデバイスでバッテリー残量を取得できることを保証するものではありません。
-- Windows App Notificationを使用するため、BTBatteryViewは通常権限で起動してください。
-- 管理者権限で起動した場合、Windows App Notificationは利用できません。
-
 ## 設定保存先
 
 BTBatteryViewの設定は以下に保存されます。
@@ -76,21 +71,13 @@ BTBatteryViewの設定は以下に保存されます。
 C:\Users\<ユーザー名>\AppData\Local\BTBatteryView\
 ```
 
-`<ユーザー名>` はWindowsのユーザー名に置き換えてください。
-
 主な保存内容・関連設定：
 
 - ウィジェット位置
 - 検出済みデバイスのキャッシュ
-- 低残量通知しきい値
+- 低残量色表示のしきい値（既定値 10%）
 - トレイポップアップ関連設定
 - `appearance.json` による簡易外観カスタマイズ
-
-通知関連のログは以下に保存されます。
-
-```text
-C:\Users\<ユーザー名>\AppData\Local\BTBatteryView\logs\
-```
 
 ## 自動起動について
 
@@ -142,7 +129,7 @@ C:\Users\<ユーザー名>\AppData\Local\BTBatteryView\appearance.json
 | `RowBackgroundColor` | デバイス行の背景色。 |
 | `RowBorderColor` | デバイス行の枠線色。 |
 | `BatteryWarningColor` | バッテリー残量が20%以下の場合の残量表示色。 |
-| `LowBatteryColor` | バッテリー残量が低残量通知しきい値以下の場合の残量表示色。 |
+| `LowBatteryColor` | バッテリー残量が10%以下（既定の低残量しきい値）の場合の残量表示色。 |
 | `TrayPopupBackgroundColor` | トレイアイコン左クリック時に表示されるポップアップの背景色。 |
 | `TrayPopupForegroundColor` | トレイポップアップの文字色。 |
 | `TrayPopupBorderColor` | トレイポップアップの枠線色。 |
@@ -194,14 +181,8 @@ The widget can also be kept always on top, and part of its appearance can be cus
   - `Refresh`
   - `Rescan`
   - `Always on top`
-  - `Test notification`
   - `Exit`
 - Tray popup display by left-clicking the system tray icon
-- Low-battery notification when a device reaches 10% or below
-- Modern Windows App Notifications for low-battery alerts
-- Repeat notifications while a device remains at low battery
-- Additional notification when the battery level drops further
-- `Test notification` command for notification diagnostics
 - Prevents multiple instances
 - Saves widget position
 - Simple appearance customization via `appearance.json`
@@ -228,17 +209,18 @@ Download `BTBatteryView.zip` from the **Assets** section on the Releases page.
 5. Pressing the `X` button does not exit the application; it hides the widget to the system tray.
 6. To fully exit the application, right-click either the tray icon or the widget itself and select `Exit`.
 7. If you connect a new device or the display is not updated, run `Rescan` from the right-click menu.
-8. To verify notification functionality, select `Test notification` from the right-click menu.
 
 ## Notes
 
+- BTBatteryView does not show Windows notifications, popups, or warning sounds for low battery levels.
+- Low battery is indicated by the battery percentage color in the widget and tray popup.
+  - 20% or below: `BatteryWarningColor`
+  - 10% or below: `LowBatteryColor`
+- `BatteryWarningColor` and `LowBatteryColor` can be customized in `appearance.json`.
 - Only devices whose battery level can be retrieved by Windows are supported.
 - Some devices may report only rough battery levels, such as in 10% increments.
 - Battery levels are scanned approximately once per minute.
 - Battery level retrieval is not guaranteed for all Bluetooth devices.
-- BTBatteryView should normally be run without administrator privileges.
-- Windows App Notifications are unavailable when BTBatteryView is running elevated as administrator.
-
 ## Settings location
 
 BTBatteryView stores settings under:
@@ -247,21 +229,13 @@ BTBatteryView stores settings under:
 C:\Users\<UserName>\AppData\Local\BTBatteryView\
 ```
 
-Replace `<UserName>` with your Windows user name.
-
 Main saved data and related settings:
 
 - Widget position
 - Detected device cache
-- Low-battery notification threshold
+- Low-battery color threshold (10% by default)
 - Tray popup display settings
 - Simple appearance customization via `appearance.json`
-
-Notification logs are stored under:
-
-```text
-C:\Users\<UserName>\AppData\Local\BTBatteryView\logs\
-```
 
 ## Startup
 
@@ -313,7 +287,7 @@ The `X` button only hides the widget. To fully exit, right-click the widget or t
 | `RowBackgroundColor` | Device row background color. |
 | `RowBorderColor` | Device row border color. |
 | `BatteryWarningColor` | Battery percentage color when the battery level is 20% or below. |
-| `LowBatteryColor` | Battery percentage color when the battery level is at or below the low-battery notification threshold. |
+| `LowBatteryColor` | Battery percentage color when the battery level is 10% or below (the default low-battery threshold). |
 | `TrayPopupBackgroundColor` | Background color of the popup shown by left-clicking the system tray icon. |
 | `TrayPopupForegroundColor` | Text color of the popup shown by left-clicking the system tray icon. |
 | `TrayPopupBorderColor` | Border color of the popup shown by left-clicking the system tray icon. |
