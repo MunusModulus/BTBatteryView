@@ -4,7 +4,7 @@
 
 ---
 
-# 日本語
+# Japanese
 
 BTBatteryView（BTBTV）は、Windowsが取得しているBluetoothデバイスのバッテリー残量を、デスクトップウィジェット風のウィンドウとシステムトレイで確認できるWindows用ユーティリティです。
 
